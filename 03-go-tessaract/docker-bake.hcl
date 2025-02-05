@@ -59,6 +59,10 @@ target "images" {
     GO_VERSION = "1.23.5",
   }
 
+  labels = {
+    "org.opencontainers.image.source" = "https://github.com/xor22h/docker-bake-quickstart"
+  }
+
   name = "image-${item.os_family}-${item.os_version}"
   description = "Build image for ${item.os_family}/${item.os_version}"
   tags = ["ghcr.io/xor22h/docker-bake-quickstart/app:${item.os_family}-${item.os_version}"]
