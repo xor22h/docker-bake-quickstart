@@ -8,18 +8,13 @@ jobs:
   bake:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Login to DockerHub
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build and push (example03)
-        uses: docker/bake-action@v6
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/bake-action@v6
         with:
           workdir: ./03-go-tessaract
+          source: .
+          files: ./docker-bake.hcl
           push: true
+          sbom: false
+          provenance: false
